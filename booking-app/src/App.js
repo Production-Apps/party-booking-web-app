@@ -10,7 +10,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 //Store page
 import Store from './components/Store';
-
 //Admin dashboard *Secure*
 
 //user dashboard *Secure*
@@ -18,8 +17,8 @@ import Store from './components/Store';
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <header className="App-header">
-        <Navbar />
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={Store} />
