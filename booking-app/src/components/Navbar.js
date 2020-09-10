@@ -21,6 +21,7 @@ import Tab from '@material-ui/core/Tab';
 import Home from '@material-ui/icons/Home';
 import PersonPin from '@material-ui/icons/PersonPin';
 import Store from '@material-ui/icons/Store';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const Navbar = () => {
   const [value, setValue] = React.useState(2);
@@ -38,13 +39,16 @@ const Navbar = () => {
         onChange={handleChange}
       >
         <Tab label="Home" icon={<Home />} component={Link} to="/" />
+        <Tab label="Store" icon={<Store />} component={Link} to="/store" />
+        <Tab label="" disabled />
+        <Tab label="" disabled />
+        <Tab label="" disabled />
         <Tab label="Login" icon={<PersonPin />} component={Link} to="/login" />
         <Tab
-          label="Store"
-          icon={<Store />}
+          label="Cart"
+          icon={<ShoppingCartIcon />}
           component={Link}
-          to="/store"
-          textColor="primary"
+          to="/cart"
         />
       </Tabs>
     </Paper>

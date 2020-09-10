@@ -10,6 +10,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 //Store page
 import Store from './components/Store';
+//Cart/checkout page
+import Cart from './components/Cart';
 //Admin dashboard *Secure*
 
 //user dashboard *Secure*
@@ -22,6 +24,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={Store} />
+        <Route path="/cart" component={Cart} />
       </header>
     </div>
   );
