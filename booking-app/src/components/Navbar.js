@@ -1,17 +1,3 @@
-// import React from 'react';
-// import { NavLink } from 'react-router-dom';
-
-// const Navbar = () => {
-//   return (
-//     <div>
-//       <NavLink to="/">Home</NavLink>
-//       <NavLink to="/login">Login</NavLink>
-//       <NavLink to="/store">Store</NavLink>
-//     </div>
-//   );
-// };
-// export default Navbar;
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -21,10 +7,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 
 import Button from '@material-ui/core/Button';
@@ -101,7 +85,7 @@ export default function ButtonAppBar() {
             <Storefront />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Party Rentals
           </Typography>
           <IconButton color="inherit" component={Link} to="/cart">
             <ShoppingCartIcon />
