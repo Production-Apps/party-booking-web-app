@@ -17,13 +17,14 @@ import Cart from './components/Cart';
 //user dashboard *Secure*
 
 function App() {
-  let itemsInCart = 0;
-  const ref = useRef(itemsInCart);
+  let items = [];
+
+  const ref = useRef();
   //Coming from Store and goint to Nav to set cart
   const setCart = (newItems) => {
-    itemsInCart = newItems.length;
+    items = newItems;
     //Call function inside Navbar
-    ref.current.setCart(itemsInCart);
+    ref.current.setCart(newItems.length);
   };
 
   return (
@@ -33,7 +34,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={() => <Store setCart={setCart} />} />
-        <Route path="/cart" component={Cart} />
+        <Route path="/cart" component={() => <Cart items items={items} />} />
       </header>
     </div>
   );
