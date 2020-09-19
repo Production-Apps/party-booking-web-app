@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
 import Slide from '@material-ui/core/Slide';
-
+import Badge from '@material-ui/core/Badge';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -63,8 +63,19 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-export default function ButtonAppBar() {
+const NavBar = forwardRef((props, ref) => {
+  const [items, setItems] = useState();
   const classes = useStyles();
+
+  const setCart = (x) => {
+    setItems(x);
+  };
+
+  useImperativeHandle(ref, () => {
+    return {
+      setCart: setCart,
+    };
+  });
 
   return (
     <div className={classes.root}>
@@ -88,7 +99,9 @@ export default function ButtonAppBar() {
             Party Rentals
           </Typography>
           <IconButton color="inherit" component={Link} to="/cart">
-            <ShoppingCartIcon />
+            <Badge badgeContent={items} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
           </IconButton>
 
           <IconButton color="inherit" component={Link} to="/login">
@@ -98,4 +111,6 @@ export default function ButtonAppBar() {
       </AppBar>
     </div>
   );
-}
+});
+
+export default NavBar;

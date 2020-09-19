@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 
 //Navigation bar
-import Navbar from './components/Navbar';
+import NavBar from './components/Navbar';
 //Home page
 import Home from './components/Home';
 //Authentication
@@ -17,13 +17,22 @@ import Cart from './components/Cart';
 //user dashboard *Secure*
 
 function App() {
+  let itemsInCart = 0;
+  const ref = useRef(itemsInCart);
+  //Coming from Store and goint to Nav to set cart
+  const setCart = (newItems) => {
+    itemsInCart = newItems.length;
+    //Call function inside Navbar
+    ref.current.setCart(itemsInCart);
+  };
+
   return (
     <div className="App">
-      <Navbar />
+      <NavBar ref={ref} />
       <header className="App-header">
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
-        <Route path="/store" component={Store} />
+        <Route path="/store" component={() => <Store setCart={setCart} />} />
         <Route path="/cart" component={Cart} />
       </header>
     </div>
