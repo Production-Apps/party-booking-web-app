@@ -36,6 +36,7 @@ export default function Store(props) {
 
       description: 'Description',
       price: 9.99,
+      quantity: 5,
     },
     {
       id: 2,
@@ -45,6 +46,7 @@ export default function Store(props) {
       title: 'Tables',
       description: 'Description',
       price: 9.99,
+      quantity: 5,
     },
     {
       id: 3,
@@ -54,6 +56,7 @@ export default function Store(props) {
       title: 'Tent',
       description: 'Description',
       price: 9.99,
+      quantity: 5,
     },
     {
       id: 4,
@@ -63,6 +66,7 @@ export default function Store(props) {
       title: 'Decor',
       description: 'Description',
       price: 9.99,
+      quantity: 5,
     },
   ];
   let cart = [];

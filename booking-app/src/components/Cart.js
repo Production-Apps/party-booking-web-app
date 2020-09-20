@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 //rsuite components
-import { Button } from 'rsuite';
-import { DateRangePicker } from 'rsuite';
-import 'rsuite/dist/styles/rsuite-default.css';
+import {
+  DateRangePicker,
+  Button,
+  Table,
+  InputNumber,
+  InputGroup,
+} from 'rsuite';
+const { Column, HeaderCell, Cell } = Table;
 
 const Cart = (props) => {
   const [isLoading, setisLoading] = useState(false);
   const [dateRange, setDateRange] = useState();
+  const [data, setData] = useState(props.items);
   let history = useHistory();
 
   const placeOrder = () => {
@@ -23,6 +29,18 @@ const Cart = (props) => {
   };
 
   const { beforeToday } = DateRangePicker;
+
+  const setQuantity = () => {
+    console.log('Hello');
+  };
+
+  const handleMinus = () => {
+    inputRef.current.handleMinus();
+  };
+  const handlePlus = () => {
+    inputRef.current.handlePlus();
+  };
+  const inputRef = React.createRef();
 
   //If there are no items in the cart then show empty text
   if (props.items.length == 0) {
@@ -43,9 +61,34 @@ const Cart = (props) => {
   }
   return (
     <div>
-      {props.items.map((item) => (
-        <h1>{item.name}</h1>
-      ))}
+      <Table height={420} data={data}>
+        <Column width={200} resizable>
+          <HeaderCell>Item</HeaderCell>
+          <Cell dataKey="name" />
+        </Column>
+
+        <Column width={100} resizable>
+          <HeaderCell>Cost</HeaderCell>
+          <Cell dataKey="price" />
+        </Column>
+
+        <Column width={150} align="center" resizable>
+          <HeaderCell>Quantity</HeaderCell>
+          <Cell>
+            <InputGroup>
+              <InputGroup.Button onClick={handleMinus}>-</InputGroup.Button>
+              <InputNumber
+                className={'custom-input-number'}
+                ref={inputRef}
+                max={100}
+                min={5}
+              />
+              <InputGroup.Button onClick={handlePlus}>+</InputGroup.Button>
+            </InputGroup>
+          </Cell>
+        </Column>
+      </Table>
+
       <DateRangePicker
         appearance="default"
         placeholder="Pick Date."
