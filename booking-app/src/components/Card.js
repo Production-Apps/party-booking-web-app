@@ -17,6 +17,12 @@ const Card = (props) => {
   return (
     <div>
       <Panel {...props} bordered header={props.tile.name}>
+        <img
+          src={props.tile.img}
+          width="150px"
+          height="150px"
+          alt={props.tile.name}
+        />
         <p>{props.tile.description}</p>
         <p>${props.tile.price}</p>
         <Button appearance="primary" onClick={(e) => handleClick(props.tile)}>
