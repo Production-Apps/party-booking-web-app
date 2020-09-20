@@ -1,5 +1,10 @@
 import React, { useState, useRef } from 'react';
+
+//UI layout
 import './App.css';
+import 'rsuite/dist/styles/rsuite-default.css';
+import { Container, Header, Content, Footer, Sidebar } from 'rsuite';
+
 import { Route } from 'react-router-dom';
 
 //Navigation bar
@@ -28,15 +33,18 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <NavBar ref={ref} />
-      <header className="App-header">
+    <Container>
+      <Header>
+        <NavBar ref={ref} />
+      </Header>
+      <Content>
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={() => <Store setCart={setCart} />} />
         <Route path="/cart" component={() => <Cart items items={items} />} />
-      </header>
-    </div>
+      </Content>
+      {/* <Footer>Footer</Footer> */}
+    </Container>
   );
 }
 

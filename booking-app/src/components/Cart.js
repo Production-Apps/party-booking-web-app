@@ -1,35 +1,29 @@
 import React, { useState } from 'react';
-import 'date-fns';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { useHistory } from 'react-router-dom';
 
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
+//rsuite components
+import { Button } from 'rsuite';
+import { DateRangePicker } from 'rsuite';
+import 'rsuite/dist/styles/rsuite-default.css';
 
 const Cart = (props) => {
   const [isLoading, setisLoading] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(
-    new Date('2014-08-18T21:11:54')
-  );
-  const classes = useStyles();
+  const [dateRange, setDateRange] = useState();
+  let history = useHistory();
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
+  const placeOrder = () => {
+    //Selected Date
+    console.log(dateRange);
+    setisLoading(true);
+    setTimeout(function () {
+      //Refresh (to clear cart) and redirect to home
+      history.push('/');
+      window.location.reload();
+    }, 3000);
   };
+
+  const { beforeToday } = DateRangePicker;
+
   //If there are no items in the cart then show empty text
   if (props.items.length == 0) {
     return (
@@ -38,11 +32,6 @@ const Cart = (props) => {
       </div>
     );
   }
-
-  const placeOrder = () => {
-    console.log('Selected date: ', selectedDate);
-    setisLoading(true);
-  };
 
   if (isLoading) {
     return (
@@ -53,31 +42,22 @@ const Cart = (props) => {
     );
   }
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <div>
       {props.items.map((item) => (
         <h1>{item.name}</h1>
       ))}
-      <Grid container justify="space-around">
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            'aria-label': 'change date',
-          }}
-        />
-      </Grid>
-      <div className={classes.root}>
-        <Button variant="contained" color="primary" onClick={placeOrder}>
-          Place order
-        </Button>
-      </div>
-    </MuiPickersUtilsProvider>
+      <DateRangePicker
+        appearance="default"
+        placeholder="Pick Date."
+        disabledDate={beforeToday()}
+        placement="right"
+        value={dateRange}
+        onChange={(dates) => setDateRange(dates)}
+      />
+      <Button appearance="primary" onClick={placeOrder}>
+        Place order
+      </Button>
+    </div>
   );
 };
 
