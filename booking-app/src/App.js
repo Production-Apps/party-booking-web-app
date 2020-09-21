@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 
 //UI layout
 import './App.css';
 import 'rsuite/dist/styles/rsuite-default.css';
-import { Container, Header, Content, Footer, Sidebar } from 'rsuite';
+import { Container, Header, Content } from 'rsuite';
 
 import { Route } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={() => <Store setCart={setCart} />} />
-        <Route path="/cart" component={() => <Cart items items={items} />} />
+        <Route path="/cart" component={() => <Cart items={items} />} />
       </Content>
       {/* <Footer>Footer</Footer> */}
     </Container>

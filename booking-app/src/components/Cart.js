@@ -8,13 +8,14 @@ import {
   Table,
   InputNumber,
   InputGroup,
+  Content,
+  FlexboxGrid,
 } from 'rsuite';
 const { Column, HeaderCell, Cell } = Table;
 
 const Cart = (props) => {
   const [isLoading, setisLoading] = useState(false);
   const [dateRange, setDateRange] = useState();
-  const [data, setData] = useState(props.items);
   let history = useHistory();
 
   const placeOrder = () => {
@@ -30,10 +31,6 @@ const Cart = (props) => {
 
   const { beforeToday } = DateRangePicker;
 
-  const setQuantity = () => {
-    console.log('Hello');
-  };
-
   const handleMinus = () => {
     inputRef.current.handleMinus();
   };
@@ -43,25 +40,28 @@ const Cart = (props) => {
   const inputRef = React.createRef();
 
   //If there are no items in the cart then show empty text
-  if (props.items.length == 0) {
+  if (props.items.length === 0) {
     return (
-      <div>
-        <h1>Empty Cart.</h1>
-      </div>
+      <Content className="Container">
+        <FlexboxGrid justify="center">
+          <h1>Empty cart.</h1>
+        </FlexboxGrid>
+      </Content>
     );
   }
 
   if (isLoading) {
     return (
-      <div>
-        <h1>Thank You</h1>
-        <p>Order successful.</p>
-      </div>
+      <Content className="Container">
+        <FlexboxGrid justify="center">
+          <h1>Thank you.</h1>
+        </FlexboxGrid>
+      </Content>
     );
   }
   return (
     <div>
-      <Table height={420} data={data}>
+      <Table height={400} data={props.items}>
         <Column width={200} resizable>
           <HeaderCell>Item</HeaderCell>
           <Cell dataKey="name" />
@@ -89,17 +89,19 @@ const Cart = (props) => {
         </Column>
       </Table>
 
-      <DateRangePicker
-        appearance="default"
-        placeholder="Pick Date."
-        disabledDate={beforeToday()}
-        placement="right"
-        value={dateRange}
-        onChange={(dates) => setDateRange(dates)}
-      />
-      <Button appearance="primary" onClick={placeOrder}>
-        Place order
-      </Button>
+      <FlexboxGrid justify="center">
+        <DateRangePicker
+          appearance="default"
+          placeholder="Pick Date."
+          disabledDate={beforeToday()}
+          placement="topEnd"
+          value={dateRange}
+          onChange={(dates) => setDateRange(dates)}
+        />
+        <Button appearance="primary" onClick={placeOrder}>
+          Place order
+        </Button>
+      </FlexboxGrid>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row, Col } from 'rsuite';
 import Card from './Card';
 
@@ -10,18 +10,16 @@ export default function Store(props) {
 
   const addToCart = (item) => {
     cart.push(item);
-    saveToPersistentStorage();
+    updateCart();
   };
 
   const removeFromCart = (item) => {
-    let x = cart.filter((cartItem) => {
-      return cartItem.id != item.id;
-    });
-    cart = x;
-    saveToPersistentStorage();
+    let index = cart.indexOf(item);
+    cart.splice(index, 1);
+    updateCart();
   };
 
-  const saveToPersistentStorage = () => {
+  const updateCart = () => {
     props.setCart(cart);
   };
 
@@ -29,7 +27,7 @@ export default function Store(props) {
     <div>
       <Row>
         {CardData.map((tile) => (
-          <Col md={6} sm={12}>
+          <Col md={6} sm={12} key={tile.id}>
             <Card
               tile={tile}
               addToCart={addToCart}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Panel, Button, Icon } from 'rsuite';
+import { Panel, Button } from 'rsuite';
 
 const Card = (props) => {
   const [inCart, setInCart] = useState(false);
@@ -16,13 +16,8 @@ const Card = (props) => {
 
   return (
     <div>
-      <Panel {...props} bordered header={props.tile.name}>
-        <img
-          src={props.tile.img}
-          width="150px"
-          height="150px"
-          alt={props.tile.name}
-        />
+      <Panel bordered header={props.tile.name}>
+        <img src={props.tile.img} height="240" alt={props.tile.name} />
         <p>{props.tile.description}</p>
         <p>${props.tile.price}</p>
         <Button appearance="primary" onClick={(e) => handleClick(props.tile)}>
