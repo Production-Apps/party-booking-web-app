@@ -1,5 +1,4 @@
 [build]
-base = "/"   // Name of the directory where the files are hosted
 publish = "build/"
 command = "npm run build"
 
