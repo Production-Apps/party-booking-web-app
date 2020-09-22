@@ -1,5 +1,5 @@
 [build]
-base = "party-booking-web-app/"   // Name of the directory where the files are hosted
+base = "/"   // Name of the directory where the files are hosted
 publish = "build/"
 command = "npm run build"
 
