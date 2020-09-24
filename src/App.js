@@ -40,7 +40,10 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/store" component={() => <Store setCart={setCart} />} />
-        <Route path="/cart" component={() => <Cart items={items} />} />
+        <Route
+          path="/cart"
+          component={() => <Cart items={items} setCart={setCart} />}
+        />
       </Content>
       {/* <Footer>Footer</Footer> */}
     </Container>
